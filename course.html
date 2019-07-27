@@ -25,31 +25,18 @@
     <div id="app">
         <div class="container">
 
-            <h1>Uni</h1>
+            <h1>Course</h1>
             <form method="post" class="input_form">
-                <div class="form-group">
-                    GPA: <input class="gpa_input" type="text" name="gpa" required />
+                <div class="form-group" v-for="a in skills">
+                    Skills: <input class="gpa_input" type="text" name="skills" required />
+                    <button v-on:click="add" class="btn btn-primary">+</button>
                 </div>
+
                 <div class="form-group">
-                    Major: <input class="major_input" type="text" name="major" required />
-                </div>
-                <div class="form-group">
-                    Reference letter:
-                    <input class="reference_input" type="radio" name="reference" value="yes" required /> yes
-                    <input class="reference_input" type="radio" name="reference" value="no" required /> no
-                </div>
-                <div class="form-group">
-                    Internship Experience:
-                    <input class="reference_input" type="radio" name="internship" value="yes" required /> yes
-                    <input class="reference_input" type="radio" name="internship" value="no" required /> no
-                </div>
-                <div class="form-group">
-                    Award:
-                    <input class="reference_input" type="radio" name="award" value="yes" required /> yes
-                    <input class="reference_input" type="radio" name="award" value="no" required /> no
-                </div>
-                <div class="form-group">
-                    Atar: <input class="major_input" type="text" name="atar" required />
+                    Course: <select class="gpa_input" name="course" required v-model="course">
+                    <option value="Data Mining">Data Mining</option>
+                    <option value="Algorithms">Algorithms</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary" v-on:click="submit">Submit</button>
             </form>
@@ -68,14 +55,27 @@
 <script>
     var myObject = new Vue({
         el: '#app',
-        data: { message: '' },
+        data: { message: '', skills: 1, course: "" },
         methods: {
             submit: function (event) {
                 event.preventDefault()
+                if (this.course === "Data Mining")
+                    score = 70
+                else
+                    score = 80
                 this.message = "processing..."
                 setTimeout(() => {
-                    this.message = "RMIT is the best uni for you!!"
+                    this.message = score + "% for " + this.course + ""
                 }, 1000)
+            },
+            add: function (event) {
+                event.preventDefault()
+                if (this.skills < 5) {
+                    this.skills += 1;
+                }
+            },
+            onInput: function (event) {
+
             }
         }
     })
