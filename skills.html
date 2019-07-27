@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="utf-8">
+<title>Page Title</title>
+<link rel="stylesheet" href="css/main_style.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Best choice</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">Uni</a></li>
+                <li><a href="course.html">Course</a></li>
+                <li class="active"><a href="skills.html">Skills</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="app">
+        <div class="container">
+
+            <h1>Required Skills</h1>
+            <form method="post" class="input_form">
+                <div class="form-group">
+                    Career: <select class="gpa_input" name="course" required v-model="career">
+                        <option value="UX">UX design</option>
+                        <option value="Full">Full Stack</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" v-on:click="submit">Submit</button>
+            </form>
+            <div>
+                {{message}}
+                <div v-show="ux">
+                    <p>Usability Engineering</p>
+                    <div class="container">
+                        <div class="skills html">90%</div>
+                    </div>
+
+                    <p>HTML</p>
+                    <div class="container">
+                        <div class="skills css">80%</div>
+                    </div>
+
+                    <p>CSS</p>
+                    <div class="container">
+                        <div class="skills js">65%</div>
+                    </div>
+
+                    <p>Art Design</p>
+                    <div class="container">
+                        <div class="skills php">60%</div>
+                    </div>
+                </div>
+                <div v-show="full">
+                    <p>Spring</p>
+                    <div class="container">
+                        <div class="skills html">90%</div>
+                    </div>
+
+                    <p>Database</p>
+                    <div class="container">
+                        <div class="skills css">80%</div>
+                    </div>
+
+                    <p>MAVEN</p>
+                    <div class="container">
+                        <div class="skills js">67%</div>
+                    </div>
+
+                    <p>Java Servelet</p>
+                    <div class="container">
+                        <div class="skills php">72%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    var myObject = new Vue({
+        el: '#app',
+        data: { message: '', skills: 1, career: "", ux: false, full: false },
+        methods: {
+            submit: function (event) {
+                event.preventDefault()
+                this.ux = false
+                this.full = false
+                this.message = "processing..."
+                setTimeout(() => {
+                    this.message = ""
+                    if (this.career === "UX")
+                        this.ux = true
+                    else
+                        this.full = true
+                }, 1000)
+            },
+        }
+    })
+    new Vue({
+        el: '#hide',
+        data: {
+            seen: false
+        }
+    })
+</script>
